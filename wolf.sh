@@ -18,12 +18,12 @@ sed -e 's/gcc//')";
 	fi
 }
 
-function transfer() {
-	zipname="$(echo $1 | awk -F '/' '{print $NF}')";
-	url="$(curl -# -T $1 https://transfer.sh)";
-	printf '\n';
-	echo -e "Download ${zipname} at ${url}";
-}
+#function transfer() {
+#	zipname="$(echo $1 | awk -F '/' '{print $NF}')";
+#	url="$(curl -# -T $1 https://transfer.sh)";
+#	printf '\n';
+#	echo -e "Download ${zipname} at ${url}";
+#}
 
 if [[ -z ${KERNELDIR} ]]; then
     echo -e "Please set KERNELDIR";
@@ -148,6 +148,12 @@ if [[ ${success} == true ]]; then
 #  Make-Type  : EAS(non-SAR)
 #⌚ Build-Time : $time
 #$(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
+
+function transfer() {
+	op=$(curl --upload-file $ZIP_DIR/$ZIPNAME https://transfer.sh/)
+	echo $op
+}
+
 transfer
 
 fi
