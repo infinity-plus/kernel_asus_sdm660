@@ -140,15 +140,15 @@ echo -e "$ZIPNAME zip can be found at $FINAL_ZIP";
 if [[ ${success} == true ]]; then
     echo -e "UPLOAD SUCCESSFUL";
 
-message="Wolf Kernel - EAS Version."
-time="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
+#message="Wolf Kernel - EAS Version."
+#time="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 
 #curl -F chat_id=$CHAT_ID -F document=@"${ZIP_DIR}/$ZIPNAME" -F caption="
 #♔♔♔♔♔♔♔BUILD-DETAILS♔♔♔♔♔♔♔
 #  Make-Type  : EAS(non-SAR)
 #⌚ Build-Time : $time
 #$(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
-
+transfer
 
 fi
 else
