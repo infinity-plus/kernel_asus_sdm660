@@ -150,8 +150,10 @@ if [[ ${success} == true ]]; then
 #$(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
 
 function transfer() {
-	op=$(curl --upload-file $ZIP_DIR/$ZIPNAME https://transfer.sh/)
-	echo $op
+	op1=$(curl --upload-file $ZIP_DIR/$ZIPNAME https://transfer.sh/)
+	op2=$(curl -F file=@$ZIP_DIR/$ZIPNAME https://0x0.st)
+	echo "transfer.sh -> "$op1
+	echo "0x0.st ------> "$op2
 }
 
 transfer
