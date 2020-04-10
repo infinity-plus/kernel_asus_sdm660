@@ -99,9 +99,9 @@ if [[ "$@" =~ "clean" ]]; then
     ${MAKE} clean
 fi
 
-#curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="#Awoo 
-#Build Scheduled for $KERNELNAME Kernel 
-#Will be posted when testing is over.." -d chat_id="-1001287030751"
+curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="#Awoo 
+Build Scheduled for $KERNELNAME Kernel 
+Will be posted when testing is over.." -d chat_id="-1001287030751"
 ${MAKE} $DEFCONFIG;
 START=$(date +"%s");
 echo -e "Using ${JOBS} threads to compile"
@@ -118,7 +118,7 @@ echo -e "Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.";
 
 if [[ ! -f "${IMAGE}" ]]; then
     echo -e "Build failed :P";
-    #curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="$KERNELNAME Kernel stopped due to an error" -d chat_id="585730571"
+    curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="$KERNELNAME Kernel stopped due to an error" -d chat_id="585730571"
     success=false;
     exit 1;
 else
@@ -140,14 +140,14 @@ echo -e "$ZIPNAME zip can be found at $FINAL_ZIP";
 if [[ ${success} == true ]]; then
     echo -e "UPLOAD SUCCESSFUL";
 
-#message="Wolf Kernel - EAS Version."
-#time="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
+message="Wolf Kernel - HMP Version."
+time="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 
-#curl -F chat_id=$CHAT_ID -F document=@"${ZIP_DIR}/$ZIPNAME" -F caption="
-#♔♔♔♔♔♔♔BUILD-DETAILS♔♔♔♔♔♔♔
-#  Make-Type  : EAS(non-SAR)
-#⌚ Build-Time : $time
-#$(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
+curl -F chat_id=$CHAT_ID -F document=@"${ZIP_DIR}/$ZIPNAME" -F caption="
+♔♔♔♔♔♔♔BUILD-DETAILS♔♔♔♔♔♔♔
+  Make-Type  : HMP(non-SAR)
+⌚ Build-Time : $time
+$(git log --pretty=format:'%h : %s' -5)" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
 
 function transfer() {
 	op1=$(curl --upload-file $ZIP_DIR/$ZIPNAME https://transfer.sh/)
